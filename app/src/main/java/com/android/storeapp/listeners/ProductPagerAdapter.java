@@ -36,8 +36,10 @@ public class ProductPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.product_pager_layout, collection, false);
         ImageView imgView = (ImageView) layout.findViewById(R.id.productImg);
+        // TODO: Placeholder image to use when no image is available
         Glide.with(mContext)
                 .load(itemList.get(position).getProductImage())
+                //.placeholder(R.drawable.checkmark)
                 .into(imgView);
         imgView.setScaleType(ImageView.ScaleType.CENTER);
         TextView txtName = (TextView) layout.findViewById(R.id.productName);
@@ -45,18 +47,26 @@ public class ProductPagerAdapter extends PagerAdapter {
         TextView txtDesc = (TextView) layout.findViewById(R.id.longDesc);
         if(itemList.get(position).getLongDescription()!=null) {
             txtDesc.setText(Html.fromHtml(itemList.get(position).getLongDescription()));
+        }else{
+            txtDesc.setText("");
         }
         RatingBar ratingBar = (RatingBar) layout.findViewById(R.id.rating);
         if(itemList.get(position).getReviewRating()!=null) {
             ratingBar.setRating(Float.parseFloat(itemList.get(position).getReviewRating()));
+        }else{
+            ratingBar.setRating(0);
         }
         TextView reviewCnt = (TextView) layout.findViewById(R.id.reviewCnt);
         if(itemList.get(position).getReviewCount()!=null) {
             reviewCnt.setText("("+itemList.get(position).getReviewCount()+")");
+        }else{
+            reviewCnt.setText("");
         }
         TextView price = (TextView) layout.findViewById(R.id.price);
         if(itemList.get(position).getPrice()!=null) {
             price.setText(itemList.get(position).getPrice());
+        }else{
+            price.setText("");
         }
         ImageView inStock = (ImageView) layout.findViewById(R.id.inStockImg);
         if(itemList.get(position).isInStock()){

@@ -41,9 +41,9 @@ public class ProductLoader extends AsyncTaskLoader<ResponseObj> {
             URL url = new URL(urlString);
             connection = (HttpsURLConnection) url.openConnection();
             // Timeout for reading InputStream arbitrarily set to 3000ms.
-            connection.setReadTimeout(3000);
+            connection.setReadTimeout(10000);
             // Timeout for connection.connect() arbitrarily set to 3000ms.
-            connection.setConnectTimeout(3000);
+            connection.setConnectTimeout(10000);
             // For this use case, set HTTP method to GET.
             connection.setRequestMethod("GET");
             // Already true by default but setting just in case; needs to be true since this request
@@ -65,6 +65,7 @@ public class ProductLoader extends AsyncTaskLoader<ResponseObj> {
                 data = gson.fromJson(result,ResponseObj.class);
             }
         } catch(Exception e){
+            //TODO: Toast message to user about error.
             e.printStackTrace();
         }finally {
             // Close Stream and disconnect HTTPS connection.

@@ -41,16 +41,24 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.productName.setText(productList.get(position).getProductName());
         if(productList.get(position).getShortDescription()!=null) {
             holder.productDesc.setText(Html.fromHtml(productList.get(position).getShortDescription()));
+        }else{
+            holder.productDesc.setText("");
         }
         if(productList.get(position).getReviewRating()!=null) {
             holder.ratingBar.setRating(Float.parseFloat(productList.get(position).getReviewRating()));
+        }else{
+            holder.ratingBar.setRating(0);
         }
         if(productList.get(position).getPrice()!=null) {
             holder.price.setText(productList.get(position).getPrice());
+        }else{
+            holder.price.setText("");
         }
 
+        // TODO: Placeholder image to use when no image is available
         Glide.with(context)
                 .load(productList.get(position).getProductImage())
+                //.placeholder(R.drawable.checkmark)
                 .into(holder.productImage);
     }
 
