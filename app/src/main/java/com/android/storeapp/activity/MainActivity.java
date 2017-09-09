@@ -54,7 +54,9 @@ public class MainActivity extends Activity implements LoaderManager.LoaderCallba
 
             currentPage = savedInstanceState.getInt("currentPage");
             previousTotalItemCount = savedInstanceState.getInt("previousTotalItemCount");
-            getLoaderManager().initLoader(0, null, this);
+            Bundle args = new Bundle();
+            args.putString("url","https://walmartlabs-test.appspot.com/_ah/api/walmart/v1/walmartproducts/c86bbded-3988-463f-94a5-6443ed7cec34/"+currentPage+"/10");
+            getLoaderManager().initLoader(0, args, this);
         }
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
